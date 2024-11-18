@@ -4,8 +4,14 @@ import ProLayout, { PageContainer } from '@ant-design/pro-layout';
 import { Layout } from 'antd';
 import { DashboardOutlined, UserOutlined } from '@ant-design/icons';
 import CustomerList from '../pages/Customers';
-// import CustomerForm from '../pages/Customers/CustomerForm';
-// import CustomerDetails from '../pages/Customers/CustomerDetails';
+import TierList from '../pages/Tiers';
+import Dashboard from '../pages/Dashboard';
+import Transactions from '../pages/Transactions'; // Import Transactions component
+import RewardsList from '../pages/Rewards';
+import CustomerPage from '../pages/Customers/CustomerPage';
+import CustomerDetail from '../pages/Customers/CustomerDetail';
+// import AddCustomer from '../pages/Customers/AddCustomer';
+// import Rewards from '../pages/Membership/Rewards';
 
 // Menu cấu hình
 const menuItems = [
@@ -23,10 +29,10 @@ const menuItems = [
         path: '/customers/list',
         name: 'Customer List',
       },
-      {
-        path: '/customers/add',
-        name: 'Add Customer',
-      },
+      // {
+      //   path: '/customers/add',
+      //   name: 'Add Customer',
+      // },
     ],
   },
   {
@@ -35,14 +41,34 @@ const menuItems = [
     icon: <UserOutlined />,
     routes: [
       {
-        path: '/membership/levels',
-        name: 'Membership Levels',
+        path: '/membership/list',
+        name: 'Membership List',
       },
+
+    ],
+  },
+  {
+    path: '/rewards',
+    name: 'Rewards',
+    icon: <UserOutlined />,
+    routes: [
       {
-        path: '/membership/rewards',
-        name: 'Rewards',
+        path: '/rewards/list',
+        name: 'Rewards List',
       },
     ],
+  },
+  // Thêm menu cho trang Transactions
+  {
+    path: '/transactions',
+    name: 'Transactions',
+    icon: <UserOutlined />,
+    routes: [
+      {
+        path: '/transactions/list',
+        name: 'Transactions List',
+      },
+    ]
   },
 ];
 
@@ -67,45 +93,19 @@ const AdminDashboard = () => {
           <Routes>
             <Route path="/dashboard" element={<Dashboard />} />
             <Route path="/customers/list" element={<CustomerList />} />
-            {/* <Route path="/customers/details/:id" element={<CustomerDetails />} /> */}
-            {/* <Route path="/customers/edit/:id" element={<CustomerForm />} /> */}
-            <Route path="/customers/add" element={<AddCustomer />} />
-            <Route path="/membership/levels" element={<MembershipLevels />} />
-            <Route path="/membership/rewards" element={<Rewards />} />
+            {/* <Route path="/customers/add" element={<AddCustomer />} /> */}
+            <Route path="/membership/list" element={<TierList />} />
+            <Route path="/rewards/list" element={<RewardsList />} />
+            {/* Thêm route cho Transactions */}
+            <Route path="/transactions/list" element={<Transactions />} />
+            <Route path="/customer/add" element={<CustomerPage />} />
+            <Route path="/customer/edit/:id" element={<CustomerPage />} />
+            <Route path="/customer/detail/:id" element={<CustomerDetail />} /> {/* Thêm đường dẫn chi tiết */}
           </Routes>
         </ProLayout>
       </Layout>
     </Router>
   );
 };
-
-// Các Component phụ
-const Dashboard = () => (
-  <PageContainer style={{ width: '100%' }}>
-    <h2>Dashboard</h2>
-    <p>Welcome to the admin dashboard!</p>
-  </PageContainer>
-);
-
-const AddCustomer = () => (
-  <PageContainer style={{ width: '100%' }}>
-    <h2>Add Customer</h2>
-    <p>Use this page to add a new customer.</p>
-  </PageContainer>
-);
-
-const MembershipLevels = () => (
-  <PageContainer style={{ width: '100%' }}>
-    <h2>Membership Levels</h2>
-    <p>Manage membership levels here.</p>
-  </PageContainer>
-);
-
-const Rewards = () => (
-  <PageContainer style={{ width: '100%' }}>
-    <h2>Rewards</h2>
-    <p>Manage rewards for members here.</p>
-  </PageContainer>
-);
 
 export default AdminDashboard;
